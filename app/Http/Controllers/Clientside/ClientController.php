@@ -7,6 +7,7 @@ use App\Mail\VerifiyEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\RegistrationRequest;
 
@@ -33,4 +34,24 @@ class ClientController extends Controller
         return  new UserResource($client);
 
     }
+
+
+
+    public function veryifiyEmail(Request $request)
+    {
+        $credentials = $request->only('email', 'otp');
+        $user = User::where('email',$request->email)->where('otp',$request->otp)->first();
+        if ($user) {
+
+            $user->update([
+                $user->email_verified_at = now(),
+                $user->otp = null,
+            ]);
+
+        return response()->json(['data'=>'',200,'messege'=>'email verified successfuly']);
+    }
+    return response()->json(['data'=>'',200,'messege'=>'email or th code is ']);
+
+    }
+
 }

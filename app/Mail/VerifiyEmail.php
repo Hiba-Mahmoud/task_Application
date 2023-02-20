@@ -50,8 +50,15 @@ class VerifiyEmail extends Mailable
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
+    public function build()
     {
-        return [];
+        return $this->markdown('mails.verifiyMail',['otp'=>$this->otp]);
     }
+    // public function attachments(): array
+    // {
+    //     return [
+    //         $this->markdown(['code'=>$this->otp])
+
+    //     ];
+    // }
 }
