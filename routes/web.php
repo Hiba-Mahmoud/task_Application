@@ -17,8 +17,9 @@ use App\Http\Middleware\RedirectIfNotAdmain;
 Route::get('login', function () {
     return view('admin.login');
 });
+Route::post('signin','AdminController@signin');
 // prefix dashboard
-Route::group(['middleware'=>['auth',RedirectIfNotAdmain::class]],function(){
+Route::group(['middleware'=>'auth',RedirectIfNotAdmain::class],function(){
 Route::get('/', function () {
     return view('admin.index');
 });

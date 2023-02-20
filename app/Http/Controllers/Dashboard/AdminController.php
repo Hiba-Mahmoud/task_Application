@@ -5,15 +5,32 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Auth\Events\Login;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AddClientRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateClientRequest;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class AdminController extends Controller
 {
+    public function signin(Request $request)
+    {
+        // dd('dd');
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+
+
+            return redirect('dashboard/list-users');
+        }
+
+        return redirect("dashboard/login")->withSuccess('Login details are not valid or make sure you are an admin');
+    }
+
     public function index()
     {
         $users = User::paginate(10);

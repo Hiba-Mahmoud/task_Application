@@ -27,11 +27,10 @@ class RedirectIfNotAdmain
     public function handle($request, Closure $next) {
         if (auth()->check()) {
             if (auth()->user()->role !='admin') {
-                return redirect('dashboard/');
+                return redirect('dashboard/login');
             }
             return $next($request);
         }
-        return redirect('dashboard/login');
-        return 'kkk';
+        // return redirect('dashboard/login');
     }
 }
