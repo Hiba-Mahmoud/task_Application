@@ -47,10 +47,10 @@
                                             </td>
                                             <td> {{ $user->mobile }} </td>
                                             <td>
-                                                <button type="button" class="btn btn-xs  delete_modale"
+                                                <button type="button" class="btn btn-xs  delete_modale  btn-danger"
                                                     data-id="{{ $user->id }}"><i class="fa fa-trash"></i>
-                                                    delete</button>
-                                                <a  class="btn btn-xs" href="{{url('dashboard/'.$user->id.'/edit')}}"><i class="fa fa-trash"></i>
+                                                    block</button>
+                                                <a  class="btn btn-xs  btn-success " href="{{url('dashboard/'.$user->id.'/edit')}}"><i class="fa fa-trash"></i>
                                                     edit</a>
                                             </td>
                                         </tr>
@@ -61,7 +61,8 @@
                             </table>
                             <div class="container">
                                 <div class="row justify-content-center text-xs-center">
-                                    {!! $users->links() !!}
+                                    <span style='width:70%;height:10%'>{{$users->links("pagination::bootstrap-5")}}
+</span>
                                 </div>
                             </div>
                         </div>
